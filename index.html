@@ -4,234 +4,483 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Good Luck Alexa!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        /* Rich Deep Purple Background */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --gold: #c9a84c;
+            --gold-light: #e8d49a;
+            --gold-pale: #f7f0db;
+            --plum-deep: #1a0d2e;
+            --plum-mid: #2e1a4a;
+            --plum-soft: #4a2e6e;
+            --cream: #fdfaf3;
+            --ink: #1c1424;
+            --muted: #7a6e88;
+        }
+
+        html, body { height: 100%; width: 100%; }
+
         body {
-            margin: 0;
-            padding: 0;
+            min-height: 100vh;
+            background: var(--plum-deep);
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            background: radial-gradient(circle at center, #42275a 0%, #1e102e 100%);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden; /* Keeps animated particles inside */
+            font-family: 'DM Sans', sans-serif;
+            overflow: hidden;
+            position: relative;
         }
 
-        /* --- ENHANCED STARDUST ANIMATION --- */
-        .stars {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+        #particles {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             pointer-events: none;
             z-index: 0;
         }
-        .star {
-            position: absolute;
-            /* Made the stars larger and much brighter */
-            width: 6px; 
-            height: 6px;
-            background: rgba(255, 240, 180, 0.95); 
+
+        .ambient {
+            position: fixed;
             border-radius: 50%;
-            /* Stronger glowing aura */
-            box-shadow: 0 0 15px 3px rgba(255, 230, 150, 0.8);
-            animation: floatUp linear infinite;
-            bottom: -20px;
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(80px);
+        }
+        .ambient-1 {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(90,45,120,0.5) 0%, transparent 70%);
+            top: -100px; left: -100px;
+            animation: drift1 18s ease-in-out infinite alternate;
+        }
+        .ambient-2 {
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(201,168,76,0.18) 0%, transparent 70%);
+            bottom: -80px; right: -80px;
+            animation: drift2 22s ease-in-out infinite alternate;
         }
 
-        /* Added more stars with varying speeds and start times for a richer effect */
-        .star:nth-child(1) { left: 5%; animation-duration: 8s; animation-delay: 0s; transform: scale(0.8); }
-        .star:nth-child(2) { left: 15%; animation-duration: 12s; animation-delay: 4s; transform: scale(1.2); }
-        .star:nth-child(3) { left: 25%; animation-duration: 7s; animation-delay: 1s; transform: scale(0.6); }
-        .star:nth-child(4) { left: 35%; animation-duration: 14s; animation-delay: 6s; transform: scale(1.5); }
-        .star:nth-child(5) { left: 45%; animation-duration: 9s; animation-delay: 2s; transform: scale(1); }
-        .star:nth-child(6) { left: 55%; animation-duration: 11s; animation-delay: 8s; transform: scale(0.9); }
-        .star:nth-child(7) { left: 65%; animation-duration: 8s; animation-delay: 3s; transform: scale(1.3); }
-        .star:nth-child(8) { left: 75%; animation-duration: 13s; animation-delay: 7s; transform: scale(0.7); }
-        .star:nth-child(9) { left: 85%; animation-duration: 10s; animation-delay: 1s; transform: scale(1.1); }
-        .star:nth-child(10) { left: 95%; animation-duration: 15s; animation-delay: 5s; transform: scale(1.4); }
+        @keyframes drift1 { to { transform: translate(80px, 60px); } }
+        @keyframes drift2 { to { transform: translate(-60px, -80px); } }
 
-        @keyframes floatUp {
-            0% { transform: translateY(0) scale(0.5); opacity: 0; }
-            10% { opacity: 1; } /* Fades in much faster now */
-            80% { opacity: 1; } /* Stays visible longer */
-            100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
-        }
-
-        /* --- REST OF THE UI --- */
-        /* Creamy, Elegant Card */
         .card {
-            background: linear-gradient(135deg, #fdfbf7 0%, #f4efe1 100%);
-            padding: 40px 50px 50px 50px;
-            border-radius: 24px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-            text-align: center;
-            max-width: 600px;
-            width: 85%;
             position: relative;
-            z-index: 1;
-            /* Entrance Animation */
-            animation: slideFadeIn 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            z-index: 2;
+            width: min(540px, 90vw);
+            background: var(--cream);
+            border-radius: 28px;
+            padding: 0;
+            overflow: hidden;
+            box-shadow:
+                0 0 0 1px rgba(201,168,76,0.25),
+                0 30px 80px rgba(0,0,0,0.7),
+                0 0 60px rgba(90,45,120,0.25);
+            animation: cardReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(40px) scale(0.97);
         }
 
-        @keyframes slideFadeIn {
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes cardReveal {
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* Top Right Close Button */
+        .card-band {
+            height: 6px;
+            background: linear-gradient(90deg, var(--plum-soft), var(--gold), var(--gold-light), var(--gold), var(--plum-soft));
+            background-size: 200% 100%;
+            animation: shimmer 4s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .card-body { padding: 36px 44px 44px; text-align: center; }
+
         .close-btn {
             position: absolute;
-            top: 20px;
-            right: 25px;
-            font-size: 20px;
-            color: #888;
-            cursor: pointer;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        .close-btn:hover { color: #333; }
-
-        /* Animated Golden Photo Halo */
-        .image-container {
-            width: 140px;
-            height: 140px;
-            margin: 0 auto 20px auto;
+            top: 18px; right: 22px;
+            width: 30px; height: 30px;
             border-radius: 50%;
+            border: 1px solid rgba(122,110,136,0.3);
             background: transparent;
-            border: 4px solid rgba(212, 175, 55, 0.4);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            color: var(--muted);
+            font-size: 14px;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s ease;
+            z-index: 3;
+        }
+        .close-btn:hover {
+            background: rgba(122,110,136,0.12);
+            color: var(--ink);
+            transform: rotate(90deg);
+        }
+
+        .avatar-wrap {
+            width: 120px; height: 120px;
+            margin: 0 auto 26px;
             position: relative;
-            /* Pulsing Glow Animation */
-            animation: goldPulse 2.5s infinite alternate;
         }
 
-        @keyframes goldPulse {
-            from { box-shadow: 0 0 10px rgba(212, 175, 55, 0.2), inset 0 0 10px rgba(212, 175, 55, 0.2); }
-            to { box-shadow: 0 0 25px rgba(212, 175, 55, 0.8), inset 0 0 20px rgba(212, 175, 55, 0.6); }
-        }
-
-        .profile-photo {
-            max-width: 85%;
-            max-height: 85%;
-            object-fit: contain;
-            border-radius: 50%; 
-        }
-
-        /* Floating Icons Animation */
-        .icons {
-            font-size: 40px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            animation: floatBob 3s ease-in-out infinite;
-        }
-
-        @keyframes floatBob {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-
-        /* Sophisticated Serif Typography */
-        h1 {
-            color: #2b1d3d;
-            margin: 0 0 10px 0;
-            font-size: 2.1em;
-            font-family: Georgia, 'Times New Roman', Times, serif;
-            line-height: 1.3;
-        }
-
-        /* Decorative Compass Divider */
-        .divider {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 15px 0 20px 0;
-        }
-        .divider::before, .divider::after {
-            content: "";
-            height: 1px;
-            width: 60px;
-            background-color: #d1c8b4;
-            margin: 0 15px;
-        }
-        .divider-icon {
-            color: #8c7f66;
-            font-size: 20px;
-        }
-
-        /* Subtext */
-        p {
-            font-size: 1.05em;
-            color: #555;
-            margin-bottom: 20px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        /* Bottom Right Share Button */
-        .share-btn {
+        .avatar-ring-svg {
             position: absolute;
-            bottom: 25px;
-            right: 30px;
-            font-size: 16px;
-            color: #7b6a58;
-            font-weight: bold;
+            top: -8px; left: -8px;
+            width: calc(100% + 16px);
+            height: calc(100% + 16px);
+            animation: rotateSlow 12s linear infinite;
+        }
+
+        @keyframes rotateSlow { to { transform: rotate(360deg); } }
+
+        .avatar-img-wrap {
+            width: 120px; height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--gold-pale);
+            background: var(--gold-pale);
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .avatar-img-wrap img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .avatar-fallback { font-size: 48px; line-height: 1; }
+
+        .icon-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 22px;
+        }
+
+        .icon-pill {
+            display: flex; align-items: center; gap: 6px;
+            background: rgba(201,168,76,0.1);
+            border: 1px solid rgba(201,168,76,0.3);
+            border-radius: 100px;
+            padding: 6px 14px;
+            font-size: 13px;
+            color: #8a6d1e;
+            font-weight: 500;
+            animation: floatPill 3.5s ease-in-out infinite;
+        }
+        .icon-pill:nth-child(2) { animation-delay: 0.8s; }
+
+        @keyframes floatPill {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .icon-pill span:first-child { font-size: 16px; }
+
+        .eyebrow {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            font-size: 2.3em;
+            color: var(--ink);
+            line-height: 1.25;
+            margin-bottom: 8px;
+        }
+
+        h1 em { font-style: italic; color: var(--plum-soft); }
+
+        .divider {
+            display: flex; align-items: center; gap: 14px;
+            margin: 20px 0;
+        }
+        .divider-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(201,168,76,0.35), transparent);
+        }
+        .divider-gem {
+            width: 8px; height: 8px;
+            background: var(--gold);
+            transform: rotate(45deg);
+            border-radius: 1px;
+            opacity: 0.7;
+        }
+
+        .message {
+            font-size: 1em;
+            color: var(--muted);
+            line-height: 1.75;
+            max-width: 360px;
+            margin: 0 auto 20px;
+            font-weight: 300;
+        }
+
+        .quote-block {
+            background: linear-gradient(135deg, rgba(74,46,110,0.06), rgba(201,168,76,0.07));
+            border-left: 3px solid var(--gold);
+            border-radius: 0 10px 10px 0;
+            padding: 14px 18px;
+            text-align: left;
+            margin: 0 0 28px;
+        }
+
+        .quote-block p {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.05em;
+            color: var(--plum-soft);
+            line-height: 1.6;
+        }
+
+        .quote-block cite {
+            display: block;
+            font-size: 12px;
+            font-style: normal;
+            color: var(--gold);
+            margin-top: 6px;
+            letter-spacing: 0.08em;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 500;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--plum-mid), var(--plum-soft));
+            color: var(--gold-light);
+            border: 1px solid rgba(201,168,76,0.3);
+            border-radius: 100px;
+            padding: 12px 28px;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: 'DM Sans', sans-serif;
             cursor: pointer;
             text-decoration: none;
-            transition: all 0.3s;
+            letter-spacing: 0.04em;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(74,46,110,0.3);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(74,46,110,0.45);
+            border-color: rgba(201,168,76,0.6);
+        }
+
+        .cta-btn svg { transition: transform 0.3s ease; }
+        .cta-btn:hover svg { transform: translateX(3px); }
+
+        .card-footer {
             display: flex;
             align-items: center;
-            gap: 5px;
+            justify-content: space-between;
+            margin-top: 28px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(201,168,76,0.15);
         }
+
+        .footer-label {
+            font-size: 11px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(122,110,136,0.6);
+            font-weight: 500;
+        }
+
+        .share-btn {
+            display: flex; align-items: center; gap: 6px;
+            font-size: 13px;
+            color: var(--muted);
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 500;
+            transition: color 0.2s ease;
+            padding: 6px 10px;
+            border-radius: 8px;
+        }
+
         .share-btn:hover {
-            color: #2b1d3d;
-            transform: translateX(3px); 
+            color: var(--plum-soft);
+            background: rgba(74,46,110,0.06);
+        }
+
+        .confetti-piece {
+            position: fixed;
+            width: 8px; height: 8px;
+            border-radius: 2px;
+            pointer-events: none;
+            z-index: 10;
+            opacity: 0;
+        }
+
+        @keyframes cardFadeOut {
+            to { opacity: 0; transform: scale(0.95) translateY(20px); }
         }
     </style>
 </head>
 <body>
 
-    <div class="stars">
-        <div class="star"></div>
-        <div class="star"></div>
-        <div class="star"></div>
-        <div class="star"></div>
-        <div class="star"></div>
-        <div class="star"></div>
-        <div class="star"></div>
-        <div class="star"></div>
-        <div class="star"></div>
-        <div class="star"></div>
-    </div>
+    <div class="ambient ambient-1"></div>
+    <div class="ambient ambient-2"></div>
+    <canvas id="particles"></canvas>
 
     <div class="card">
-        <a href="#" class="close-btn" title="Close">✕</a>
+        <div class="card-band"></div>
+        <div class="card-body">
 
-        <div class="image-container">
-            <img src="l.png" alt="Alexa" class="profile-photo">
+            <button class="close-btn" onclick="this.closest('.card').style.animation='cardFadeOut 0.4s forwards'" title="Close">✕</button>
+
+            <div class="avatar-wrap">
+                <svg class="avatar-ring-svg" viewBox="0 0 136 136" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="68" cy="68" r="62" stroke="url(#ringGrad)" stroke-width="1.5" stroke-dasharray="6 8" stroke-linecap="round"/>
+                    <defs>
+                        <linearGradient id="ringGrad" x1="0" y1="0" x2="136" y2="136" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#c9a84c" stop-opacity="0.3"/>
+                            <stop offset="40%" stop-color="#e8d49a" stop-opacity="0.9"/>
+                            <stop offset="100%" stop-color="#c9a84c" stop-opacity="0.2"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <div class="avatar-img-wrap">
+                    <img src="l.png" alt="Alexa" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <span class="avatar-fallback" style="display:none">🌟</span>
+                </div>
+            </div>
+
+            <p class="eyebrow">A special message</p>
+
+            <h1>Good Luck,<br><em>Alexa!</em></h1>
+
+            <div class="icon-row">
+                <div class="icon-pill"><span>💼</span> Interview Day</div>
+                <div class="icon-pill"><span>✨</span> You've got this</div>
+            </div>
+
+            <div class="divider">
+                <div class="divider-line"></div>
+                <div class="divider-gem"></div>
+                <div class="divider-line"></div>
+            </div>
+
+            <p class="message">Take a deep breath, walk in with confidence, and show them exactly what you're made of. We're all rooting for you.</p>
+
+            <div class="quote-block">
+                <p>"Suddenly Apparently 123 ABC Whych is Kalee???'"</p>
+                <cite>— A reminder for today</cite>
+            </div>
+
+            <a href="#" class="cta-btn" onclick="triggerConfetti(); return false;">
+                Send More Love
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+
+            <div class="card-footer">
+                <span class="footer-label">123 ABC &nbsp;·&nbsp; Job Interview</span>
+                <button class="share-btn" onclick="navigator.clipboard?.writeText(location.href); this.textContent='✓ Copied!'">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 1H3a1 1 0 00-1 1v8M5 4h6a1 1 0 011 1v7a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+                    Share
+                </button>
+            </div>
+
         </div>
-
-        <div class="icons">
-            <span>💼</span>
-            <span>✨</span>
-        </div>
-
-        <h1>Good luck Alexa in your job<br>interview 123 ABC!</h1>
-
-        <div class="divider">
-            <span class="divider-icon">❂</span>
-        </div>
-
-        <p>You've got this. Take a deep breath and show them what you can do!</p>
-
-        <a href="#" class="share-btn" title="Share">Share ➔</a>
     </div>
 
+    <script>
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        let W, H, particles = [];
+
+        function resize() {
+            W = canvas.width = window.innerWidth;
+            H = canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        class Particle {
+            constructor() { this.reset(true); }
+            reset(initial) {
+                this.x = Math.random() * W;
+                this.y = initial ? Math.random() * H : H + 10;
+                this.r = 1.5 + Math.random() * 2.5;
+                this.vx = (Math.random() - 0.5) * 0.4;
+                this.vy = -(0.4 + Math.random() * 0.8);
+                this.alpha = 0;
+                this.maxAlpha = 0.4 + Math.random() * 0.55;
+                this.phase = initial ? Math.random() * Math.PI * 2 : 0;
+                this.twinkleSpeed = 0.02 + Math.random() * 0.03;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.phase += this.twinkleSpeed;
+                this.alpha = this.maxAlpha * (0.5 + 0.5 * Math.sin(this.phase));
+                if (this.y < -20) this.reset(false);
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.fillStyle = `hsl(${42 + Math.random() * 20}, 80%, 75%)`;
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = 'rgba(240,210,130,0.7)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        for (let i = 0; i < 60; i++) particles.push(new Particle());
+
+        function loop() {
+            ctx.clearRect(0, 0, W, H);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(loop);
+        }
+        loop();
+
+        function triggerConfetti() {
+            const colors = ['#c9a84c','#e8d49a','#8b5cf6','#f472b6','#34d399','#60a5fa'];
+            for (let i = 0; i < 40; i++) {
+                const el = document.createElement('div');
+                el.className = 'confetti-piece';
+                el.style.cssText = `
+                    left: ${40 + Math.random() * 20}%;
+                    top: 50%;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    width: ${4 + Math.random() * 8}px;
+                    height: ${4 + Math.random() * 8}px;
+                    border-radius: ${Math.random() > 0.5 ? '50%' : '2px'};
+                `;
+                document.body.appendChild(el);
+                const angle = Math.random() * Math.PI * 2;
+                const dist = 120 + Math.random() * 200;
+                const tx = Math.cos(angle) * dist;
+                const ty = Math.sin(angle) * dist - 80;
+                el.animate([
+                    { opacity: 1, transform: `translate(0,0) rotate(0deg)` },
+                    { opacity: 0, transform: `translate(${tx}px, ${ty}px) rotate(${360 + Math.random()*360}deg)` }
+                ], { duration: 800 + Math.random() * 600, easing: 'cubic-bezier(0,0.9,0.57,1)', fill: 'forwards' })
+                .onfinish = () => el.remove();
+            }
+        }
+    </script>
 </body>
 </html>
