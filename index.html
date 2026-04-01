@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Good Luck Alexa!</title>
+    <style>
+        /* Modern Gradient Background */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: radial-gradient(circle at center, #866baf 0%, #4a3b75 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+
+        /* Enhanced Card Design */
+        .card {
+            background-color: #fdfdfd;
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Top Right Close Button */
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 20px;
+            color: #555;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        /* The Uploaded Photo */
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            margin: 0 auto 20px auto;
+            display: block;
+        }
+
+        /* Icons */
+        .icons {
+            font-size: 45px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Sophisticated Serif Typography */
+        h1 {
+            color: #4a2c5a;
+            margin: 0 0 15px 0;
+            font-size: 2.2em;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            line-height: 1.2;
+        }
+
+        /* Decorative Divider */
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .divider::before, .divider::after {
+            content: "";
+            height: 1px;
+            width: 50px;
+            background-color: #ccc;
+            margin: 0 10px;
+        }
+        .divider-icon {
+            color: #888;
+            font-size: 14px;
+        }
+
+        /* Subtext */
+        p {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        /* Bottom Right Share Button */
+        .share-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 25px;
+            font-size: 20px;
+            color: #555;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        /* Hover effects for buttons */
+        .close-btn:hover, .share-btn:hover {
+            color: #000;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <a href="#" class="close-btn" title="Close">✕</a>
+
+        <img src="assets/l.png" alt="Alexa" class="profile-photo">
+
+        <div class="icons">
+            <span>💼</span>
+            <span>✨</span>
+        </div>
+
+        <h1>Good luck Alexa in your job interview 123 ABC!</h1>
+
+        <div class="divider">
+            <span class="divider-icon">❦</span>
+        </div>
+
+        <p>You've got this. Take a deep breath and show them what you can do!</p>
+
+        <a href="#" class="share-btn" title="Share">➦</a>
+    </div>
+
+</body>
+</html>
