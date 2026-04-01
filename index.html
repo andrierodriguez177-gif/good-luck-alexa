@@ -18,7 +18,7 @@
             overflow: hidden; /* Keeps animated particles inside */
         }
 
-        /* Animated Stardust Background Effect */
+        /* --- ENHANCED STARDUST ANIMATION --- */
         .stars {
             position: absolute;
             top: 0;
@@ -30,33 +30,43 @@
         }
         .star {
             position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(255, 223, 137, 0.6);
+            /* Made the stars larger and much brighter */
+            width: 6px; 
+            height: 6px;
+            background: rgba(255, 240, 180, 0.95); 
             border-radius: 50%;
-            box-shadow: 0 0 10px rgba(255, 223, 137, 0.8);
+            /* Stronger glowing aura */
+            box-shadow: 0 0 15px 3px rgba(255, 230, 150, 0.8);
             animation: floatUp linear infinite;
+            bottom: -20px;
         }
-        /* Creating a few stars with different positions and speeds */
-        .star:nth-child(1) { left: 10%; bottom: -10px; animation-duration: 8s; }
-        .star:nth-child(2) { left: 25%; bottom: -10px; animation-duration: 12s; animation-delay: 2s; }
-        .star:nth-child(3) { left: 40%; bottom: -10px; animation-duration: 7s; animation-delay: 4s; }
-        .star:nth-child(4) { left: 60%; bottom: -10px; animation-duration: 10s; }
-        .star:nth-child(5) { left: 80%; bottom: -10px; animation-duration: 9s; animation-delay: 1s; }
-        .star:nth-child(6) { left: 90%; bottom: -10px; animation-duration: 11s; animation-delay: 3s; }
+
+        /* Added more stars with varying speeds and start times for a richer effect */
+        .star:nth-child(1) { left: 5%; animation-duration: 8s; animation-delay: 0s; transform: scale(0.8); }
+        .star:nth-child(2) { left: 15%; animation-duration: 12s; animation-delay: 4s; transform: scale(1.2); }
+        .star:nth-child(3) { left: 25%; animation-duration: 7s; animation-delay: 1s; transform: scale(0.6); }
+        .star:nth-child(4) { left: 35%; animation-duration: 14s; animation-delay: 6s; transform: scale(1.5); }
+        .star:nth-child(5) { left: 45%; animation-duration: 9s; animation-delay: 2s; transform: scale(1); }
+        .star:nth-child(6) { left: 55%; animation-duration: 11s; animation-delay: 8s; transform: scale(0.9); }
+        .star:nth-child(7) { left: 65%; animation-duration: 8s; animation-delay: 3s; transform: scale(1.3); }
+        .star:nth-child(8) { left: 75%; animation-duration: 13s; animation-delay: 7s; transform: scale(0.7); }
+        .star:nth-child(9) { left: 85%; animation-duration: 10s; animation-delay: 1s; transform: scale(1.1); }
+        .star:nth-child(10) { left: 95%; animation-duration: 15s; animation-delay: 5s; transform: scale(1.4); }
 
         @keyframes floatUp {
             0% { transform: translateY(0) scale(0.5); opacity: 0; }
-            50% { opacity: 1; scale: 1.2; }
-            100% { transform: translateY(-100vh) scale(0.5); opacity: 0; }
+            10% { opacity: 1; } /* Fades in much faster now */
+            80% { opacity: 1; } /* Stays visible longer */
+            100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
         }
 
+        /* --- REST OF THE UI --- */
         /* Creamy, Elegant Card */
         .card {
             background: linear-gradient(135deg, #fdfbf7 0%, #f4efe1 100%);
             padding: 40px 50px 50px 50px;
             border-radius: 24px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
             text-align: center;
             max-width: 600px;
             width: 85%;
@@ -103,14 +113,14 @@
 
         @keyframes goldPulse {
             from { box-shadow: 0 0 10px rgba(212, 175, 55, 0.2), inset 0 0 10px rgba(212, 175, 55, 0.2); }
-            to { box-shadow: 0 0 25px rgba(212, 175, 55, 0.7), inset 0 0 20px rgba(212, 175, 55, 0.5); }
+            to { box-shadow: 0 0 25px rgba(212, 175, 55, 0.8), inset 0 0 20px rgba(212, 175, 55, 0.6); }
         }
 
         .profile-photo {
             max-width: 85%;
             max-height: 85%;
             object-fit: contain;
-            border-radius: 50%; /* Added just in case it's not pre-cropped */
+            border-radius: 50%; 
         }
 
         /* Floating Icons Animation */
@@ -181,13 +191,17 @@
         }
         .share-btn:hover {
             color: #2b1d3d;
-            transform: translateX(3px); /* Little hover nudge */
+            transform: translateX(3px); 
         }
     </style>
 </head>
 <body>
 
     <div class="stars">
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
         <div class="star"></div>
         <div class="star"></div>
         <div class="star"></div>
