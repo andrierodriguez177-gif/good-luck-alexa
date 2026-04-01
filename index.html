@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Good Luck Alexa!</title>
     <style>
-        /* Modern Gradient Background */
+        /* Rich Deep Purple Background */
         body {
             margin: 0;
             padding: 0;
@@ -13,22 +13,63 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: radial-gradient(circle at center, #866baf 0%, #4a3b75 100%);
+            background: radial-gradient(circle at center, #42275a 0%, #1e102e 100%);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #333;
+            overflow: hidden; /* Keeps animated particles inside */
         }
 
-        /* Enhanced Card Design */
+        /* Animated Stardust Background Effect */
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .star {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 223, 137, 0.6);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255, 223, 137, 0.8);
+            animation: floatUp linear infinite;
+        }
+        /* Creating a few stars with different positions and speeds */
+        .star:nth-child(1) { left: 10%; bottom: -10px; animation-duration: 8s; }
+        .star:nth-child(2) { left: 25%; bottom: -10px; animation-duration: 12s; animation-delay: 2s; }
+        .star:nth-child(3) { left: 40%; bottom: -10px; animation-duration: 7s; animation-delay: 4s; }
+        .star:nth-child(4) { left: 60%; bottom: -10px; animation-duration: 10s; }
+        .star:nth-child(5) { left: 80%; bottom: -10px; animation-duration: 9s; animation-delay: 1s; }
+        .star:nth-child(6) { left: 90%; bottom: -10px; animation-duration: 11s; animation-delay: 3s; }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0.5); opacity: 0; }
+            50% { opacity: 1; scale: 1.2; }
+            100% { transform: translateY(-100vh) scale(0.5); opacity: 0; }
+        }
+
+        /* Creamy, Elegant Card */
         .card {
-            background-color: #fdfdfd;
-            padding: 40px 50px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            background: linear-gradient(135deg, #fdfbf7 0%, #f4efe1 100%);
+            padding: 40px 50px 50px 50px;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             text-align: center;
             max-width: 600px;
-            width: 90%;
+            width: 85%;
             position: relative;
-            animation: fadeIn 1s ease-in-out;
+            z-index: 1;
+            /* Entrance Animation */
+            animation: slideFadeIn 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        @keyframes slideFadeIn {
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Top Right Close Button */
@@ -37,111 +78,145 @@
             top: 20px;
             right: 25px;
             font-size: 20px;
-            color: #555;
+            color: #888;
             cursor: pointer;
             text-decoration: none;
+            transition: color 0.3s;
         }
+        .close-btn:hover { color: #333; }
 
-        /* The Uploaded Photo */
-        .profile-photo {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 4px solid #fff;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        /* Animated Golden Photo Halo */
+        .image-container {
+            width: 140px;
+            height: 140px;
             margin: 0 auto 20px auto;
-            display: block;
+            border-radius: 50%;
+            background: transparent;
+            border: 4px solid rgba(212, 175, 55, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            /* Pulsing Glow Animation */
+            animation: goldPulse 2.5s infinite alternate;
         }
 
-        /* Icons */
+        @keyframes goldPulse {
+            from { box-shadow: 0 0 10px rgba(212, 175, 55, 0.2), inset 0 0 10px rgba(212, 175, 55, 0.2); }
+            to { box-shadow: 0 0 25px rgba(212, 175, 55, 0.7), inset 0 0 20px rgba(212, 175, 55, 0.5); }
+        }
+
+        .profile-photo {
+            max-width: 85%;
+            max-height: 85%;
+            object-fit: contain;
+            border-radius: 50%; /* Added just in case it's not pre-cropped */
+        }
+
+        /* Floating Icons Animation */
         .icons {
-            font-size: 45px;
-            margin-bottom: 15px;
+            font-size: 40px;
+            margin-bottom: 10px;
             display: flex;
             justify-content: center;
             gap: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: floatBob 3s ease-in-out infinite;
+        }
+
+        @keyframes floatBob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
         }
 
         /* Sophisticated Serif Typography */
         h1 {
-            color: #4a2c5a;
-            margin: 0 0 15px 0;
-            font-size: 2.2em;
+            color: #2b1d3d;
+            margin: 0 0 10px 0;
+            font-size: 2.1em;
             font-family: Georgia, 'Times New Roman', Times, serif;
-            line-height: 1.2;
+            line-height: 1.3;
         }
 
-        /* Decorative Divider */
+        /* Decorative Compass Divider */
         .divider {
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 20px 0;
+            margin: 15px 0 20px 0;
         }
         .divider::before, .divider::after {
             content: "";
             height: 1px;
-            width: 50px;
-            background-color: #ccc;
-            margin: 0 10px;
+            width: 60px;
+            background-color: #d1c8b4;
+            margin: 0 15px;
         }
         .divider-icon {
-            color: #888;
-            font-size: 14px;
+            color: #8c7f66;
+            font-size: 20px;
         }
 
         /* Subtext */
         p {
-            font-size: 1.1em;
+            font-size: 1.05em;
             color: #555;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         /* Bottom Right Share Button */
         .share-btn {
             position: absolute;
-            bottom: 20px;
-            right: 25px;
-            font-size: 20px;
-            color: #555;
+            bottom: 25px;
+            right: 30px;
+            font-size: 16px;
+            color: #7b6a58;
+            font-weight: bold;
             cursor: pointer;
             text-decoration: none;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
-
-        /* Hover effects for buttons */
-        .close-btn:hover, .share-btn:hover {
-            color: #000;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .share-btn:hover {
+            color: #2b1d3d;
+            transform: translateX(3px); /* Little hover nudge */
         }
     </style>
 </head>
 <body>
 
+    <div class="stars">
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+    </div>
+
     <div class="card">
         <a href="#" class="close-btn" title="Close">✕</a>
 
-        <img src="l.png" alt="Alexa" class="profile-photo">
+        <div class="image-container">
+            <img src="l.png" alt="Alexa" class="profile-photo">
+        </div>
 
         <div class="icons">
             <span>💼</span>
             <span>✨</span>
         </div>
 
-        <h1>Good luck Alexa in your job interview 123 ABC!</h1>
+        <h1>Good luck Alexa in your job<br>interview 123 ABC!</h1>
 
         <div class="divider">
-            <span class="divider-icon">❦</span>
+            <span class="divider-icon">❂</span>
         </div>
 
         <p>You've got this. Take a deep breath and show them what you can do!</p>
 
-        <a href="#" class="share-btn" title="Share">➦</a>
+        <a href="#" class="share-btn" title="Share">Share ➔</a>
     </div>
 
 </body>
